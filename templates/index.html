@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EKAP İhale Verisi</title>
+    <style>
+        /* Sayfa arka planı */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d0e8f2, #f9f9f9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Form kutusu */
+        .form-container {
+            background-color: #ffffffcc;
+            backdrop-filter: blur(4px);
+            padding: 40px 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 420px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="email"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .flash-message {
+            color: crimson;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>İhale Verilerini Al</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-message">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form method="post">
+            <label for="email">E-posta adresinizi girin:</label>
+            <input type="email" id="email" name="email" placeholder="sample@mail_adresses" required>
+
+            <label for="search_term">Arama Terimi Seçin:</label>
+            <select name="search_term" id="search_term" required>
+                <option value="">-- Terim seçin --</option>
+                <option value="Sinyalizasyon">Sinyalizasyon</option>
+                <option value="Trafik">Trafik</option>
+            </select>
+
+            <button type="submit">Verileri Gönder</button>
+        </form>
+
+        <form action="{{ url_for('logout') }}" method="get">
+            <button type="submit" style="margin-top: 20px; background-color: crimson;">Çıkış Yap</button>
+        </form>
+    </div>
+</body>
+
+</html>

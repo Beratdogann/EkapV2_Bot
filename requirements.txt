@@ -1,0 +1,7 @@
+undetected-chromedriver
+selenium
+pandas
+STMP
+Flask
+Numpy
+Sqlite3

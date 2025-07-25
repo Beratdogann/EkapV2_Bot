@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kayıt Ol</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #eef2f3, #8ec5fc);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* body'nin varsayılan marjlarını sıfırlayın */
+            position: relative;
+            /* Logoları konumlandırmak için */
+        }
+
+        .header-content {
+            position: absolute;
+            top: 20px;
+            /* Üstten boşluk */
+            width: 96%;
+            /* Sayfanın genişliği */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2%;
+            /* Yanlardan boşluk */
+            box-sizing: border-box;
+            /* Padding'i genişliğe dahil et */
+        }
+
+        .header-content img {
+            height: 60px;
+            /* Logoların yüksekliği */
+            width: auto;
+        }
+
+        .header-content .left-logo {
+            /* Bu float kullanımı yerine flexbox'ın kendi hizalama özelliklerini kullanmak daha modern ve uyumlu olacaktır */
+            /* float: left; */
+        }
+
+        .header-content .right-logo {
+            /* float: right; */
+        }
+
+        .header-text {
+            color: #333;
+            /* Yazı rengi */
+            font-size: 24px;
+            /* Yazı boyutu */
+            font-weight: bold;
+            text-align: center;
+            flex-grow: 1;
+            /* Ortadaki yazının genişlemesini sağlar */
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            z-index: 1;
+            /* Formun logoların önünde olmasını sağlar */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            /* Padding'in input genişliğine dahil olmasını sağlar */
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-content">
+        <img src="{{ url_for('static', filename='images/GUNCEL_S_LOGO.png') }}" alt="Sol Logo" class="left-logo">
+        <div class="header-text">Title of Company</div>
+        <img src="{{ url_for('static', filename='images/image.png') }}" alt="Sağ Logo" class="right-logo">
+    </div>
+
+    <div class="form-container">
+        <h2>Kayıt Ol</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="error">{{ messages[0] }}</div>
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="email" name="email" placeholder="E-posta" required>
+            <input type="password" name="password" placeholder="Şifre" required>
+            <button type="submit">Kayıt Ol</button>
+        </form>
+
+        <form action="{{ url_for('login') }}" method="get">
+            <button type="submit" style="margin-top: 10px;">Zaten Üye misin? Giriş Yap</button>
+        </form>
+    </div>
+</body>
+
+</html>
